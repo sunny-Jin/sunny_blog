@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div>
+      <span class="lable">用户名:</span>
+      <input type="text" name="username" id="username" value="" aria-required="true"/>
+  </div>
+  <div>
+      <span class="lable">密 码:</span>
+      <input type="text" name="pwd" id="pwd" value="" aria-required="true"/>
+  </div>
+  <div>
+      <button id="login" type="button" >登录</button>
+      <!--<input type="submit" value="登录" />-->
+  </div>
+  <script type="text/javascript">
+      $('#login').click(function(){
+          $.ajax({
+              type:"get",
+              url:"/blog-ssm/User/Login.do",
+              data:{
+                 // userName:$('#username').val(),
+                //  password:$('#pwd').val()
+                  userName:"jzy",
+                  password:"jzy"
+              },
+              dataType:"json",
+              success:function(dataJson)
+              {
+                  alert("登录成功");
+              },
+              error:function(err)
+              {
+                  alert("出现错误");
+              }
+          });
+      });
+
+  </script>
+</body>
+</html>
