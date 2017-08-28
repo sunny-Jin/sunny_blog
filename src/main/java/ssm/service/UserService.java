@@ -7,4 +7,5 @@ import ssm.model.User;
  */
 public interface UserService {
     User getUser(String userName,String password);
+    Integer  updateUser(int id,String password);
 }

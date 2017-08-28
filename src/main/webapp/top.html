@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>退出</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div>
+    <button type="submit" id="logout" name="logout">退出</button>
+</div>
+<script type="text/javascript">
+    $('#logout').click(function () {
+       $.ajax({
+           type:'POST',
+           url:"/User/logout.do",
+           data:{},
+           dataType:'json',
+           success:function (datajson) {
+               if(datajson.success == true)
+               {
+                   top.location.href="Login.html";
+//                   window.top.href = "Login.html";
+               }
+
+           },
+           error:function (err) {
+               alert("出现错误");
+           }
+       });
+    });
+</script>
+</body>
+</html>

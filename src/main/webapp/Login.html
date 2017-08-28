@@ -12,8 +12,14 @@
   </div>
   <div>
       <span class="lable">密 码:</span>
-      <input type="text" name="pwd" id="pwd" value="" aria-required="true"/>
+      <input type="password" name="pwd" id="pwd" value="" aria-required="true"/>
   </div>
+ <!-- <div>
+      <span class="label">验证码</span>
+      <input type="text" name="validate" id="validate" value="" aria-required="true">
+      <img src="/User/pictureCode.do" id="pictureCode" alt="验证码">
+      <a href="" onclick="myReload()">看不清楚，换一个</a>
+  </div>-->
   <div>
       <button id="login" type="button" >登录</button>
       <!--<input type="submit" value="登录" />-->
@@ -21,18 +27,21 @@
   <script type="text/javascript">
       $('#login').click(function(){
           $.ajax({
-              type:"get",
-              url:"/blog-ssm/User/Login.do",
+              type:"post",
+              url:"/User/Login.do",
               data:{
-                 // userName:$('#username').val(),
-                //  password:$('#pwd').val()
-                  userName:"jzy",
-                  password:"jzy"
+                  userName:$('#username').val(),
+                  password:$('#pwd').val()
               },
               dataType:"json",
-              success:function(dataJson)
-              {
-                  alert("登录成功");
+              success:function(dataJson) {
+                  if (dataJson.success == true) {
+                  window.location.href = "indexManage.html";
+              }
+              else
+                  {
+                      window.location.href = "Login.html"
+                  }
               },
               error:function(err)
               {

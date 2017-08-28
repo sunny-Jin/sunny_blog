@@ -7,6 +7,13 @@ import java.util.Date;
  */
 public class User {
     private long id;
+    private String username;
+    private String password;
+    private String nickname;
+    private String salt;
+    private int frozen;
+    private String email;
+    private int role;
 
     public long getId() {
         return id;
@@ -16,12 +23,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -32,12 +39,12 @@ public class User {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getSalt() {
@@ -48,11 +55,11 @@ public class User {
         this.salt = salt;
     }
 
-    public byte getFrozen() {
+    public int getFrozen() {
         return frozen;
     }
 
-    public void setFrozen(byte frozen) {
+    public void setFrozen(int frozen) {
         this.frozen = frozen;
     }
 
@@ -64,11 +71,11 @@ public class User {
         this.email = email;
     }
 
-    public byte getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(byte role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -88,13 +95,6 @@ public class User {
         this.forgetDuration = forgetDuration;
     }
 
-    private String userName;
-    private String password;
-    private String nickName;
-    private String salt;
-    private byte frozen;
-    private String email;
-    private byte role;
     private String forgetCode;
     private Date forgetDuration;
 }

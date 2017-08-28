@@ -4,10 +4,10 @@
 
     <resultMap id="UserBaseMap" type="ssm.model.User">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result property="user_name" column="username" jdbcType="VARCHAR"/>
-        <result property="nick_name" column="nickname" jdbcType="VARCHAR"/>
-        <result property="user_pwd" column="password" jdbcType="VARCHAR"/>
-        <result property="pwd_salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
         <result property="frozen" column="frozen" jdbcType="INTEGER"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="role" column="role" jdbcType="INTEGER"/>
@@ -18,4 +18,9 @@
         select * FROM  lovej_users
         WHERE username = #{userName } AND password = #{password}
     </select>
+
+    <update id="updateUser">
+        update lovej_users set password = #{password}
+        WHERE id = #{id}
+    </update>
 </mapper>
