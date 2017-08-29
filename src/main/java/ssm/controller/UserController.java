@@ -33,9 +33,8 @@ public class UserController {
         String password = request.getParameter("password");
         String validate = request.getParameter("validate");
         JSONObject json = new JSONObject();
-        boolean flag = false;
         String s = String.valueOf(session.getAttribute("SESSION_CODE"));
-        flag = Judge(validate,s);
+        boolean  flag = Judge(validate,s);
         if(flag == false)
         {
             json.put("fail",true);
