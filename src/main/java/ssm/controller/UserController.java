@@ -1,6 +1,5 @@
 package ssm.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +9,9 @@ import ssm.model.User;
 import ssm.service.UserService;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 /**
  * Created by jzy on 2017/8/27.
@@ -28,14 +27,21 @@ public class UserController {
 
     @RequestMapping("/Login.do")
     @ResponseBody
-    public String Login(HttpServletRequest request,Model model)
+    public String Login(HttpServletRequest request,Model model,HttpSession session)
     {
-
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        User u  = userService.getUser(userName,password);
+        String validate = request.getParameter("validate");
         JSONObject json = new JSONObject();
-
+        boolean flag = false;
+        String s = String.valueOf(session.getAttribute("SESSION_CODE"));
+        flag = Judge(validate,s);
+        if(flag == false)
+        {
+            json.put("fail",true);
+            return json.toJSONString();
+        }
+        User u  = userService.getUser(userName,password);
         if(u!=null)
         {
             json.put("success", true);
@@ -47,6 +53,15 @@ public class UserController {
             json.put("fail",false);
             return json.toJSONString();
         }
+    }
+
+    public boolean Judge(String validate,String s)
+    {
+        if(s.equals(validate))
+        {
+            return true;
+        }
+        return  false;
     }
 
     @RequestMapping("/update.do")

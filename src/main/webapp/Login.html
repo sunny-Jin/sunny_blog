@@ -14,32 +14,47 @@
       <span class="lable">密 码:</span>
       <input type="password" name="pwd" id="pwd" value="" aria-required="true"/>
   </div>
- <!-- <div>
+  <div>
       <span class="label">验证码</span>
       <input type="text" name="validate" id="validate" value="" aria-required="true">
-      <img src="/User/pictureCode.do" id="pictureCode" alt="验证码">
-      <a href="" onclick="myReload()">看不清楚，换一个</a>
-  </div>-->
+      <img src="" id="pictureCode" alt="验证码">
+      <a href=" ">看不清楚，换一张</a>
+  </div>
   <div>
       <button id="login" type="button" >登录</button>
       <!--<input type="submit" value="登录" />-->
   </div>
   <script type="text/javascript">
+      function getTimestamp() {
+          var time = new Date();
+          return time.getTime();
+      }
+      $(document).ready(function () {
+          $('#pictureCode').attr("src","/SetCode/generate.do?t="+getTimestamp());
+      });
       $('#login').click(function(){
           $.ajax({
               type:"post",
               url:"/User/Login.do",
               data:{
                   userName:$('#username').val(),
-                  password:$('#pwd').val()
+                  password:$('#pwd').val(),
+                  validate:$('#validate').val()
               },
               dataType:"json",
               success:function(dataJson) {
+                  if(dataJson.fail == true)
+                  {
+                      alert("验证码输入错误");
+                      window.location.href = "Login.html"
+                      return;
+                  }
                   if (dataJson.success == true) {
                   window.location.href = "indexManage.html";
               }
               else
                   {
+                      alert("账号或密码错误，请重新输入！");
                       window.location.href = "Login.html"
                   }
               },
