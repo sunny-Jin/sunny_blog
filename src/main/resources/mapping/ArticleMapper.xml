@@ -15,6 +15,6 @@
     </insert>
     <select id="getContent" resultMap="ArticleBaseMap">
         select content FROM article
-        WHERE id = 3
+        WHERE id = 4
     </select>
 </mapper>

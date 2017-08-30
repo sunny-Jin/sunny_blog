@@ -5,7 +5,7 @@
     <title>显示文章</title>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 </head>
-<body>
+<body id="display">
   <script type="text/javascript">
       $(document).ready(function () {
          $.ajax({
@@ -16,7 +16,8 @@
              },
              dataType:'json',
              success:function (dataJson) {
-
+               alert(dataJson.article);
+                 $('#display').html(dataJson.article);
              },
              error:function (err) {
                  alert("出现错误");
