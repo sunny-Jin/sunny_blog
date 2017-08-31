@@ -2,29 +2,62 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>ueditor demo</title>
+    <title>发表文章</title>
 </head>
 <body>
+<div>
+    <p>文章标题</p>
+    <select id="sel">
+        <option style="width: 100px;height: 50px;">请选择</option>
+        <option value="1">原创</option>
+        <option value="2">转载</option>
+        <option value="3">翻译</option>
+    </select>
+    <input type="text" value=" " style="width: 500px;height: 30px;">
+    <p>文章内容</p>
+</div>
 <!-- 加载编辑器的容器 -->
+<script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
+<div>
+    <p>文章标签（添加Tag，你的内容能被更多人看到）我们为什么要打Tag？</p>
+    <input  type="time" value="">
+</div>
+<div>
+    <p>文章分类（到分类首页）</p>
+    <label><input name="articleType" id="AI" type="radio" value="" />人工智能</label>
+    <label><input name="articleType" id="foreground" type="radio" value="" />前端</label>
+    <label><input name="articleType" id="background" type="radio" value="" />后端</label>
+    <label><input name="articleType" id="program" type="radio" value="" />编程语言</label>
+    <label><input name="articleType" id="sql" type="radio" value="" />数据库</label>
+    <label><input name="articleType" id="security" type="radio" value="" />安全</label>
+    <label><input name="articleType" id="other" type="radio" value="" />其他</label>
+</div>
+<div>
+    <p>摘要：（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）</p>
+    <textarea cols="100" rows="5">
 
-<script id="container" name="content" type="text/plain" style="width: 1000px;height: 400px;">这里写你的初始化内容</script>
-<button type="submit" id="submitbtn">提交</button>
+    </textarea>
+</div>
+<div>
+    <button type="submit" id="submitbtn">发表文章</button>
+</div>
+
 <!-- 配置文件 -->
-<link rel="stylesheet" href="umeditor/themes/default/css/umeditor.css">
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="umeditor/third-party/jquery.min.js"></script>
-<script type="text/javascript" charset="uft-8" src="umeditor/umeditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="umeditor/umeditor.js"></script>
-<script type="text/javascript" charset="utf-8" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="uft-8" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 <!-- 编辑器源码文件 -->
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
-    $(function(){
-//        window.ue = UM.getEditor('container',{
-//            toolbar:['undo redo | bold italic underline']
-//        });
-        window.ue = UM.getEditor('container');
+    $(function() {
+        window.ue = UE.getEditor('container', {
+            toolbar: ['undo', 'redo']
+        });
     });
+    //    var ue = UE.getEditor('container',{
+    //        toolbar:['undo redo | bold italic underline']
+    //    });
     //    ue.ready(function(){
     //        //设置编辑器的内容
     //        ue.setContent('hello');

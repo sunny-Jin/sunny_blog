@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示用户列表</title>
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table-zh-CN.js"></script>
+
+</head>
+<body>
+<div>
+    <p>显示用户列表</p>
+    <table id="showUser">
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#showUser').bootstrapTable({
+                url:"/User/showUser.do",
+                method: 'get',
+                striped: true,
+                uniqueId:"id",
+                pageSize:"2",
+                pageNumber:"1",
+                pagination:true,   //允许分页
+                height:"400",
+                cache: false,  //缓存
+                pageNumber: 1,  //
+                pageList: [10, 50, 100, 200, 500], //
+                dataType: "json", //数据类型一定要加上
+                columns:[
+                    {
+                        field:'id',
+                        title:'编号',
+                        align:'center'
+                    },
+                    {
+                        field:'username',
+                        title:'姓名',
+                        align:'center'
+                    },
+                    {
+                        field:'nickname',
+                        title:'昵称',
+                        align:'center'
+                    },
+                    {
+                        field:'password',
+                        title:'密码',
+                        align:'center'
+                    }
+
+                ]
+            });
+        });
+
+    </script>
+</div>
+</body>
+</html>

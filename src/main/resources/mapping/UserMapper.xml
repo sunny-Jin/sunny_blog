@@ -23,4 +23,8 @@
         update lovej_users set password = #{password}
         WHERE id = #{id}
     </update>
+
+    <select id="getAllUsers" resultMap="UserBaseMap">
+        SELECT * FROM lovej_users
+    </select>
 </mapper>

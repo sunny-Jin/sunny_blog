@@ -7,6 +7,7 @@ import ssm.service.UserService;
 
 import javax.annotation.Resource;
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * Created by jzy on 2017/8/27.
@@ -22,4 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public Integer updateUser(int id, String password){ return userDao.updateUser(id,password); }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
 }

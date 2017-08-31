@@ -11,6 +11,7 @@ import ssm.service.UserService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -103,5 +104,16 @@ public class UserController {
        JSONObject json = new JSONObject();
        json.put("success",true);
        return json.toJSONString();
+    }
+
+    @RequestMapping("/showUser.do")
+    @ResponseBody
+    public String showUser(HttpServletRequest req)
+    {
+      List<User> users =  userService.getAllUsers();
+     // JSONObject jsonObject = new JSONObject();
+    //  jsonObject.put("list",users);
+      net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray.fromObject(users);
+      return jsonArray.toString();
     }
 }

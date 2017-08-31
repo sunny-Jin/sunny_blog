@@ -4,28 +4,53 @@
     <meta charset="UTF-8">
     <title>后台管理</title>
     <style>
+        *{margin:0;padding:0;}
+        body{background:#fff;}
         #iframeTop{
             width: 100%;
             height: 70px;
-            background-color: #0f9c7c;
+        }
+        #iframeNav{
+            width: 100%;
+            height: 80px;
+            background-color: #eee;
         }
         #iframeLeft{
-            width: 15%;
+            width: 10%;
             height: 700px;
             float: left;
+
+        }
+
+        #iframetemp{
+            width: 10%;
+            height: 700px;
+            float: left;
+            /*background-color: #777777;*/
         }
         #iframeContent{
-            width: 84%;
+            width: 70%;
             height: 700px;
-            background-color: #38b3d4;
+            float: left;
+            /*background-color: #8c8d8d;*/
         }
+        #iframeRight{
+            width: 10%;
+            height: 700px;
+            float: right;
+
+        }
+
     </style>
 </head>
 <body>
     <div>
         <iframe id="iframeTop" name="iframeTop" frameborder="0" src="top.html"></iframe>
-        <iframe id="iframeLeft" name="iframeLeft" frameborder="0" src="left.html"></iframe>
+        <iframe id="iframeNav" name="iframeNav" frameborder="0" src="nav.html"></iframe>
+        <iframe id="iframeLeft" name="iframeLeft" frameborder="0" src=""></iframe>
+        <iframe id="iframetemp" name="iframetemp" frameborder="0" src="left.html"></iframe>
         <iframe id="iframeContent" name="iframeContent" frameborder="0" src="content.html"></iframe>
+        <iframe id="iframeRight" name="iframeRight" frameborder="0" src=""></iframe>
     </div>
 </body>
 </html>
