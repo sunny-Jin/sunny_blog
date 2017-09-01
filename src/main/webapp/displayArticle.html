@@ -10,13 +10,12 @@
       $(document).ready(function () {
          $.ajax({
            type:'post',
-           url:"Write/displayContent.do",
+           url:"/Article/displayContent.do",
            data:{
 
              },
              dataType:'json',
              success:function (dataJson) {
-               alert(dataJson.article);
                  $('#display').html(dataJson.article);
              },
              error:function (err) {

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ssm.dao.WriteDao">
+<mapper namespace="ssm.dao.ArticleDao">
 
     <resultMap id="ArticleBaseMap" type="ssm.model.Article">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="publishTime" column="publishTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <!--<select id="getUser" resultMap="UserBaseMap">-->
-        <!--select * FROM  lovej_users-->
-        <!--WHERE username = #{userName } AND password = #{password}-->
-    <!--</select>-->
     <insert id="addContent">
         INSERT INTO article(content)VALUES (#{content})
     </insert>
     <select id="getContent" resultMap="ArticleBaseMap">
         select content FROM article
         WHERE id = 6
+    </select>
+
+    <select id="getArticles" resultMap="ArticleBaseMap">
+        SELECT * FROM article
     </select>
 </mapper>
