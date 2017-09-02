@@ -21,7 +21,7 @@ public class ArticleContoller {
 
     @Resource
     private ArticleService articleService;
-
+    JSONObject jsonObject = new JSONObject();
     @RequestMapping("/showArticles.do")
     @ResponseBody
     /*
@@ -60,10 +60,27 @@ public class ArticleContoller {
     @ResponseBody
     public String displayContent(HttpServletRequest request)
     {
-        Article article = articleService.getContent();
+        int id = Integer.parseInt(request.getParameter("id"));
+        Article article = articleService.getContent(id);
         String str = article.getContent();
-        JSONObject jsonObject = new JSONObject();
+        //JSONObject jsonObject = new JSONObject();
         jsonObject.put("article",str);
+        return jsonObject.toString();
+    }
+    /*
+    * 删除文章信息
+    * */
+    @RequestMapping("/delArticle.do")
+    @ResponseBody
+    public String delArticle(HttpServletRequest request)
+    {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int delFlag = articleService.delArticle(id);
+        if(delFlag > 0)
+        {
+            jsonObject.put("Flag",true);
+        }
+
         return jsonObject.toString();
     }
 

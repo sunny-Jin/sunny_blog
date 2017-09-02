@@ -22,11 +22,15 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.getArticles();
     }
 
-    public Article getContent() {
-        return articleDao.getContent();
+    public Article getContent(int id) {
+        return articleDao.getContent(id);
     }
 
     public int addContent(String content) {
         return articleDao.addContent(content);
+    }
+
+    public int delArticle(int id) {
+        return articleDao.delArticle(id);
     }
 }

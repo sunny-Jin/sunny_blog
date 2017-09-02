@@ -13,6 +13,7 @@ public interface ArticleService {
 
     List<Article> getArticles();
 
-    Article getContent();
+    Article getContent(int id);
     int addContent(String content);
+    int delArticle(int id);
 }

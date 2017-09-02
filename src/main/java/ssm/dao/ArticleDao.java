@@ -15,9 +15,14 @@ public interface ArticleDao {
 
     /*
     * 获取文章内容*/
-    Article getContent();
+    Article getContent(@Param("id") int id);
 
     /*
     * 文章入库*/
     int addContent(@Param("content") String content);
+
+    /*
+    * 删除文章
+    * */
+    int delArticle(@Param("id") int id);
 }

@@ -14,10 +14,15 @@
     </insert>
     <select id="getContent" resultMap="ArticleBaseMap">
         select content FROM article
-        WHERE id = 6
+        WHERE id = #{id}
     </select>
 
     <select id="getArticles" resultMap="ArticleBaseMap">
         SELECT * FROM article
     </select>
+
+    <delete id="delArticle" >
+        DELETE FROM article
+         WHERE id = #{id}
+    </delete>
 </mapper>

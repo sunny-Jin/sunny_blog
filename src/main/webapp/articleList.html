@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/bootstrap-table-zh-CN.js"></script>
 
 </head>
-<body>
+<body id="display">
 <div>
     <p>文章列表展示</p>
     <table id="showArticles">
@@ -23,7 +23,7 @@
                 method: 'get',
                 striped: true,
                 uniqueId:"id",
-                pageSize:"2",
+                pageSize:"4",
                 pageNumber:"1",
                 pagination:true,   //允许分页
                 height:"400",
@@ -54,16 +54,88 @@
                         formatter:function (value,row,index) {
                             return formatterTime(value.time);
                         }
+                    },
+                    {  field:'Button',
+                        title:'操作',
+                        align:'center',
+                        events:operateEvents,
+                        formatter:AddFunction
                     }
                 ]
             });
         });
+        
+        function AddFunction(value,row,index) {
+            return[
+                '<button id="view" type="button" class="btn btn-default">显示</button> &nbsp;&nbsp;',
+                '<button id="del" type="button" class="btn btn-default">删除</button>'
+            ].join("")
+        }
+        
+       window.operateEvents = {
+            "click #view":function (e,value,row,index) {
+                viewArticle(row.id);
+
+            },
+           "click #del":function (e,value,row,index) {
+               delArticle(row.id);
+           }
+       }
 
         function formatterTime(value) {
             var jsDate = new Date(value);
             var converttime = jsDate.getFullYear()+'-'+(jsDate.getMonth()+1)+'-'+jsDate.getDate()+' '+
                 jsDate.getHours()+':'+jsDate.getMinutes()+':'+jsDate.getSeconds();
             return converttime;
+        }
+
+        function delArticle(id) {
+            var flag = confirm("确认删除文章?");
+            if(flag == true)
+            {
+                $.ajax({
+                        type:'post',
+                        url:'/Article/delArticle.do',
+                        data:{
+                            id:id
+                        },
+                        dataType:'json',
+                        success:function (datajson) {
+                            if(datajson.Flag == true)
+                            {
+                                alert("文章删除成功");
+                                $('#showArticles').bootstrapTable('refresh',{
+                                    url:"/Article/showArticles.do"
+                                });
+                            }
+                            else
+                            {
+                                alert("文章删除失败");
+                            }
+
+                        },
+                        error:function (err) {
+                            alert("出现错误");
+                        }
+                    });
+            }
+        }
+
+        function viewArticle(id) {
+            $.ajax({
+                type:'post',
+                url:'/Article/displayContent.do',
+                data:{
+                    id:id
+                },
+                dataType:'json',
+                success:function (datajson) {
+                    $('#display').html(datajson.article);
+                },
+                error:function (err) {
+                    alert("出现错误");
+                }
+            });
         }
 
     </script>
