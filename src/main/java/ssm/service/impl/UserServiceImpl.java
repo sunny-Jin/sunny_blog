@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
+
+    public int addUser(String userName,String nickName,String email,String password)
+    {
+        return userDao.addUser(userName,nickName,email,password);
+    }
 }

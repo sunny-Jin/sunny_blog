@@ -11,4 +11,5 @@ public interface UserService {
     User getUser(String userName,String password);
     Integer  updateUser(int id,String password);
     List<User> getAllUsers();
+    int addUser(String userName,String nickName,String email,String password);
 }

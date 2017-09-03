@@ -116,4 +116,21 @@ public class UserController {
       net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray.fromObject(users);
       return jsonArray.toString();
     }
+
+    @RequestMapping("/addUser.do")
+    @ResponseBody
+    public String addUser(HttpServletRequest request)
+    {
+        String userName = request.getParameter("userName");
+        String nickName = request.getParameter("nickName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        int Flag = userService.addUser(userName,nickName,email,password);
+        JSONObject json = new JSONObject();
+        if(Flag > 0)
+        {
+            json.put("success",true);
+        }
+        return json.toJSONString();
+    }
 }

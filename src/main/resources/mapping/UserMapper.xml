@@ -27,4 +27,9 @@
     <select id="getAllUsers" resultMap="UserBaseMap">
         SELECT * FROM lovej_users
     </select>
+
+    <insert id="addUser">
+        INSERT INTO lovej_users(username,nickname,password,email) VALUES(#{userName},#{nickName},
+        #{password},#{email})
+    </insert>
 </mapper>
