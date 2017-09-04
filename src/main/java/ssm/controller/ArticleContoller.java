@@ -37,10 +37,14 @@ public class ArticleContoller {
     /*
     * 将文章相关信息写入数据库
     * */
-    @RequestMapping("/getContent.do")
+    @RequestMapping("/addArticle.do")
     @ResponseBody
-    public void getContent(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException
+    public void addArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException
     {
+        String title = request.getParameter("title");
+        String tags = request.getParameter("tags");
+        String type = request.getParameter("type");
+        String summary= request.getParameter("summary");
         String str = request.getParameter("content");
         if(str != null)
         {
