@@ -2,7 +2,10 @@ package ssm.service;
 
 
 import ssm.model.Article;
+import ssm.model.User;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -16,4 +19,5 @@ public interface ArticleService {
     Article getContent(int id);
     int addContent(String content);
     int delArticle(int id);
+    int addArticle(String title, String tags, int type, String summary, String content, Timestamp publishTime, User u);
 }

@@ -3,7 +3,9 @@ package ssm.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import ssm.model.Article;
+import ssm.model.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -25,4 +27,8 @@ public interface ArticleDao {
     * 删除文章
     * */
     int delArticle(@Param("id") int id);
+
+    int addArticle(@Param("title") String title, @Param("tags") String tags, @Param("type") int type, @Param("summary")
+                   String summary, @Param("content") String content, @Param("publishTime")Timestamp publishTiem,@Param("u")
+                           User u);
 }

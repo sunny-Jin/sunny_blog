@@ -7,7 +7,12 @@
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="author" column="author" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="summary" column="summary" jdbcType="VARCHAR"/>
+        <result property="keywords" column="keywords" jdbcType="VARCHAR"/>
         <result property="publishTime" column="publishTime" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="userId" jdbcType="BIGINT"/>
+        <result property="dictionaryId" column="dictionaryId" jdbcType="BIGINT"/>
+        <result property="status" column="status" jdbcType="BIGINT"/>
     </resultMap>
     <insert id="addContent">
         INSERT INTO article(content)VALUES (#{content})
@@ -25,4 +30,8 @@
         DELETE FROM article
          WHERE id = #{id}
     </delete>
+    <insert id="addArticle">
+        INSERT INTO article(title,keywords,dictionaryId,summary,content,publishTime,userId,author) VALUES (#{title},#{tags},
+        #{type},#{summary},#{content},#{publishTime},#{u.id},#{u.username})
+    </insert>
 </mapper>

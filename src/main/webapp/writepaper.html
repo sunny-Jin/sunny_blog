@@ -35,7 +35,7 @@
     <input type="text" class="form-control" id="tags" style="width: 300px;" required>
 </div>
 
-<div id="wrap">
+<div>
     <p>文章分类（到分类首页）</p>
     <label><input name="articleType" id="AI" type="radio" value="1" />人工智能</label>
     <label><input name="articleType" id="foreground" type="radio" value="2" />前端</label>
@@ -48,6 +48,7 @@
 <div>
     <p>摘要：（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）</p>
     <textarea id="summary" cols="100" rows="5">
+
     </textarea>
 </div>
 
@@ -85,8 +86,8 @@
                 title:$('#title').val(),
                 tags:$('#tags').val(),
                 content:htmltxt,
-//                type:$('input:radio:checked').val(),
-                type:$('#wrap input[name="articleType"]:checked ').val(),
+                type:$('input:radio:checked').val(),
+               // type:$('#wrap input[name="articleType"]:checked ').val(),
                 summary:$('#summary').val()
             },
             dataType:'json',

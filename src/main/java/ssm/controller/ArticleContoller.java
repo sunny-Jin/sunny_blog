@@ -12,8 +12,11 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import ssm.model.User;
 
 @Controller
 @RequestMapping("/Article")
@@ -39,17 +42,25 @@ public class ArticleContoller {
     * */
     @RequestMapping("/addArticle.do")
     @ResponseBody
-    public void addArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException
+    public void addArticle(HttpServletRequest request,HttpSession session) throws ServletException,IOException
     {
         String title = request.getParameter("title");
         String tags = request.getParameter("tags");
-        String type = request.getParameter("type");
+        int type = Integer.parseInt(request.getParameter("type"));
         String summary= request.getParameter("summary");
-        String str = request.getParameter("content");
-        if(str != null)
+        String content = request.getParameter("content");
+//        Date now = new Date();
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String time = format.format(now);
+        java.sql.Timestamp publishTime = new java.sql.Timestamp(new Date().getTime());  //发表时间
+       User u = (User)session.getAttribute("session_user");
+
+
+        if(content != null)
         {
             //写入数据库
-            articleService.addContent(str);
+            articleService.addArticle(title,tags,type,summary,content,publishTime,u);
+          //  articleService.addContent(str);
         }
         else
         {

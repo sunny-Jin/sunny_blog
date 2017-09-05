@@ -45,7 +45,8 @@ public class UserController {
         if(u!=null)
         {
             json.put("success", true);
-            request.getSession().setAttribute(SESSION_USER,u);
+         //   request.getSession().setAttribute(SESSION_USER,u);
+            session.setAttribute(SESSION_USER,u);
             return json.toJSONString();
         }
         else
