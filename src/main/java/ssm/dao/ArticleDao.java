@@ -31,4 +31,10 @@ public interface ArticleDao {
     int addArticle(@Param("title") String title, @Param("tags") String tags, @Param("type") int type, @Param("summary")
                    String summary, @Param("content") String content, @Param("publishTime")Timestamp publishTiem,@Param("u")
                            User u);
+    /*
+    * 获取草稿箱文章
+    * */
+    List<Article> getDrafts();
+
+    int delDraft(@Param("id") int id);
 }

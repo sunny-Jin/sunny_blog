@@ -40,4 +40,13 @@ public class ArticleServiceImpl implements ArticleService {
     {
         return articleDao.addArticle(title,tags,type,summary,content,publishTime,u);
     }
+
+    public List<Article> getDrafts() {
+
+        return articleDao.getDrafts();
+    }
+
+    public int delDraft(int id) {
+        return articleDao.delDraft(id);
+    }
 }

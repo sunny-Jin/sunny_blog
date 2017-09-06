@@ -17,4 +17,5 @@ public interface UserDao {
     List<User> getAllUsers();
     int addUser(@Param("userName") String userName, @Param("nickName") String nickName,
                 @Param("email") String email, @Param("password") String password);
+
 }

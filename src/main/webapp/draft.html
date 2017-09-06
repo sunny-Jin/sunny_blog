@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>草稿箱</title>
+    <title>文章列表展示</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table-zh-CN.js"></script>
+</head>
+<body id="display">
+<p>草稿箱列表展示</p>
+<table id="showdrafts">
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#showdrafts').bootstrapTable({
+            url:"/Article/showDrafts.do",
+            method: 'get',
+            striped: true,
+            uniqueId:"id",
+            pageSize:"4",
+            pageNumber:"1",
+            pagination:true,   //允许分页
+            height:"400",
+            cache: false,  //缓存
+            pageNumber: 1,  //
+            pageList: [10, 50, 100, 200, 500], //
+            dataType: "json", //数据类型一定要加上
+            columns:[
+                {
+                    field:'id',
+                    title:'编号',
+                    align:'center'
+                },
+                {
+                    field:'title',
+                    title:'文章标题',
+                    align:'center'
+                },
+                {
+                    field:'author',
+                    title:'作者',
+                    align:'center'
+                },
+                {
+                    field:'publishTime',
+                    title:'发表时间',
+                    align:'center',
+                    formatter:function (value,row,index) {
+                        return formatterTime(value.time);
+                    }
+                },
+                {  field:'Button',
+                    title:'操作',
+                    align:'center',
+                    events:operateEvents,
+                    formatter:AddFunction
+                }
+            ]
+        });
+    });
+
+    function AddFunction(value,row,index) {
+        return[
+            '<button id="view" type="button" class="btn btn-default">显示</button> &nbsp;&nbsp;',
+            '<button id="edit" type="button" class="btn btn-default">编辑</button>&nbsp;&nbsp;',
+            '<button id="del" type="button" class="btn btn-default">删除</button>'
+        ].join("")
+    }
+
+    window.operateEvents = {
+        "click #view":function (e,value,row,index) {
+            viewDraft(row.id);
+
+        },
+        "click #edit":function (e,value,row,index) {
+          editDraft(row.id);
+        },
+        "click #del":function (e,value,row,index) {
+            delDraft(row.id);
+        }
+    }
+
+    function formatterTime(value) {
+        var jsDate = new Date(value);
+        var converttime = jsDate.getFullYear()+'-'+(jsDate.getMonth()+1)+'-'+jsDate.getDate()+' '+
+            jsDate.getHours()+':'+jsDate.getMinutes()+':'+jsDate.getSeconds();
+        return converttime;
+    }
+
+    function delDraft(id) {
+        var flag = confirm("确认删除草稿?");
+        if(flag == true)
+        {
+            $.ajax({
+                type:'post',
+                url:'/Article/delDraft.do',
+                data:{
+                    id:id
+                },
+                dataType:'json',
+                success:function (datajson) {
+                    if(datajson.Flag == true)
+                    {
+                        alert("草稿删除成功");
+                        $('#showdrafts').bootstrapTable('refresh',{
+                            url:"/Article/showDrafts.do"
+                        });
+                    }
+                    else
+                    {
+                        alert("草稿删除失败");
+                    }
+
+                },
+                error:function (err) {
+                    alert("出现错误");
+                }
+            });
+        }
+    }
+
+    function viewDraft(id) {
+        $.ajax({
+            type:'post',
+            url:'/Article/displayContent.do',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function (datajson) {
+                $('#display').html(datajson.article);
+            },
+            error:function (err) {
+                alert("出现错误");
+            }
+        });
+    }
+
+    function editDraft(id) {
+        var url = "writepaper.html?" +id;
+        window.open(url,"iframeContent");
+    }
+
+</script>
+</body>
+</html>

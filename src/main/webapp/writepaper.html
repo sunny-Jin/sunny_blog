@@ -65,6 +65,33 @@
         window.ue = UE.getEditor('container', {
             toolbar: ['undo', 'redo']
         });
+        alert("传到写文章页面了");
+        var url1 = location.search;
+
+        if (url1.indexOf("?") != -1) {
+            var id = url1.substr(1);
+        }
+        //根据草稿箱传递过来的ID读取数据库中对应的数据显示到页面上。
+        $.ajax({
+            type:'post',
+            url:'/Article/displayContent.do',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function (datajson) {
+                ue.ready(function() {
+                    ue.setContent(datajson.article.content);
+                });
+                $('#title').val(datajson.article.title);
+                $('#tags').val(datajson.article.tags);
+              //  ('input:radio:checked').val();
+                $('#summary').val(datajson.article.summary);
+            },
+            error:function (err) {
+                alert("出现错误");
+            }
+        });
     });
     //    var ue = UE.getEditor('container',{
     //        toolbar:['undo redo | bold italic underline']

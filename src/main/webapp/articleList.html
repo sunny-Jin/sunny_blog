@@ -130,7 +130,8 @@
                 },
                 dataType:'json',
                 success:function (datajson) {
-                    $('#display').html(datajson.article);
+                    alert(datajson.article);
+                    $('#display').html(datajson.article.content);
                 },
                 error:function (err) {
                     alert("出现错误");

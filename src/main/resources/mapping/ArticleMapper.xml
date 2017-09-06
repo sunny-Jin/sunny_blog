@@ -18,7 +18,7 @@
         INSERT INTO article(content)VALUES (#{content})
     </insert>
     <select id="getContent" resultMap="ArticleBaseMap">
-        select content FROM article
+        select * FROM article
         WHERE id = #{id}
     </select>
 
@@ -31,7 +31,17 @@
          WHERE id = #{id}
     </delete>
     <insert id="addArticle">
-        INSERT INTO article(title,keywords,dictionaryId,summary,content,publishTime,userId,author) VALUES (#{title},#{tags},
-        #{type},#{summary},#{content},#{publishTime},#{u.id},#{u.username})
+        INSERT INTO article(title,keywords,dictionaryId,summary,content,publishTime,userId,author,status) VALUES (#{title},#{tags},
+        #{type},#{summary},#{content},#{publishTime},#{u.id},#{u.username},1)
     </insert>
+
+    <select id="getDrafts" resultMap="ArticleBaseMap">
+        SELECT * FROM article
+        WHERE status = 0
+    </select>
+
+    <delete id="delDraft">
+        DELETE FROM article
+        WHERE id = #{id}
+    </delete>
 </mapper>

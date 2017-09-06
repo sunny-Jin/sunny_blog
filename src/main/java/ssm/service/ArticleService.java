@@ -20,4 +20,8 @@ public interface ArticleService {
     int addContent(String content);
     int delArticle(int id);
     int addArticle(String title, String tags, int type, String summary, String content, Timestamp publishTime, User u);
+
+    List<Article> getDrafts();
+
+    int delDraft(int id);
 }

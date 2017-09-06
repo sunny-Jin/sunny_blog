@@ -11,7 +11,6 @@ import ssm.service.ArticleService;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
@@ -77,9 +76,9 @@ public class ArticleContoller {
     {
         int id = Integer.parseInt(request.getParameter("id"));
         Article article = articleService.getContent(id);
-        String str = article.getContent();
+      //  String str = article.getContent();
         //JSONObject jsonObject = new JSONObject();
-        jsonObject.put("article",str);
+        jsonObject.put("article",article);
         return jsonObject.toString();
     }
     /*
@@ -99,4 +98,25 @@ public class ArticleContoller {
         return jsonObject.toString();
     }
 
+    @RequestMapping("/showDrafts.do")
+    @ResponseBody
+    public String showDrafts(HttpServletRequest request)
+    {
+        List<Article> list = articleService.getDrafts();
+        JSONArray jsonArray = JSONArray.fromObject(list);
+        return jsonArray.toString();
+    }
+
+    @RequestMapping("/delDraft.do")
+    @ResponseBody
+    public String delDraft(HttpServletRequest request)
+    {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int delFlag = articleService.delDraft(id);
+        if(delFlag > 0)
+        {
+            jsonObject.put("Flag",true);
+        }
+        return jsonObject.toString();
+    }
 }
