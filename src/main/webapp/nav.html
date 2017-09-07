@@ -12,7 +12,7 @@
 <nav style="display: inline-block;width: 700px;" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="left.html" target="iframetemp">用户管理</a>
+            <a class="navbar-brand" href=" " onclick="show()">用户管理</a>
         </div>
         <div class="navbar-header">
             <a class="navbar-brand" href="writepaper.html" target="iframeContent">发表文章</a>
@@ -35,5 +35,21 @@
     </div>
 </nav>
 </div>
+<script type="text/javascript">
+    function show() {
+        var flag = false;
+        if(flag == false) {
+            flag = true;
+            window.open("left.html", "iframetemp");
+
+        }
+        else if(flag == true)
+        {
+            alert("true");
+            window.open("#", "iframetemp");
+            flag = false;
+        }
+    }
+</script>
 </body>
 </html>
