@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
+
     @Resource
     private ArticleDao articleDao;
 
@@ -48,5 +49,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     public int delDraft(int id) {
         return articleDao.delDraft(id);
+    }
+
+    public List<Article> getLastArticles() {
+        return articleDao.getLastArticles();
     }
 }

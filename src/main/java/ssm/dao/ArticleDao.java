@@ -37,4 +37,9 @@ public interface ArticleDao {
     List<Article> getDrafts();
 
     int delDraft(@Param("id") int id);
+
+    /*
+    * 获取最新文章
+    * */
+    List<Article> getLastArticles();
 }

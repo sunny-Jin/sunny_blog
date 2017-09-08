@@ -44,4 +44,9 @@
         DELETE FROM article
         WHERE id = #{id}
     </delete>
+
+    <select id="getLastArticles" resultMap="ArticleBaseMap">
+       SELECT title FROM article
+        ORDER by publishTime DESC  LIMIT 5
+    </select>
 </mapper>

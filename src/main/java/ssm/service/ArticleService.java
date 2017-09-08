@@ -24,4 +24,6 @@ public interface ArticleService {
     List<Article> getDrafts();
 
     int delDraft(int id);
+
+    List<Article> getLastArticles();
 }

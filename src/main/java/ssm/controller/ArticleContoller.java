@@ -119,4 +119,13 @@ public class ArticleContoller {
         }
         return jsonObject.toString();
     }
+
+    @RequestMapping("/getLastArticles.do")
+    @ResponseBody
+    public String getLastArticles(HttpServletRequest request)
+    {
+        List<Article> articles = articleService.getLastArticles();
+        JSONArray jsonArray = JSONArray.fromObject(articles);
+        return  jsonArray.toString();
+    }
 }
