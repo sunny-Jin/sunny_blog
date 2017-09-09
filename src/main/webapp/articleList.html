@@ -130,7 +130,6 @@
                 },
                 dataType:'json',
                 success:function (datajson) {
-                    alert(datajson.article);
                     $('#display').html(datajson.article.content);
                 },
                 error:function (err) {

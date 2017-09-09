@@ -96,9 +96,9 @@
     <div class="about_c">
       <p>网名：Sunny-Jin | 冰香</p>
       <p>职业：爱生活的程序猿 </p>
-      <p>籍贯：四川省―成都市</p>
-      <p>电话：15281059358</p>
-      <p>邮箱：biy1990126.com</p>
+      <p>地址：四川省―成都市</p>
+      <p>微信：cxjzy1211</p>
+      <p>邮箱：biy1990@126.com</p>
     </div>
     <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
     <div class="tj_news">
@@ -106,37 +106,34 @@
         <p class="tj_t1">最新文章</p>
       </h2>
       <ul>
-        <!--<li><a href="/">犯错了怎么办？</a></li>-->
-        <!--<li><a href="/">两只蜗牛艰难又浪漫的一吻</a></li>-->
-        <!--<li><a href="/">春暖花开-走走停停-发现美</a></li>-->
-        <!--<li><a href="/">琰智国际-Nativ for Life官方网站</a></li>-->
-        <!--<li><a href="/">个人博客模板（2014草根寻梦）</a></li>-->
-        <!--<li><a href="/">简单手工纸玫瑰</a></li>-->
-        <!--<li><a href="/">响应式个人博客模板（蓝色清新）</a></li>-->
-        <!--<li><a href="/">蓝色政府（卫生计划生育局）网站</a></li>-->
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+
       </ul>
       <h2>
         <p class="tj_t2">推荐文章</p>
       </h2>
       <ul>
-        <li id="0"></li>
-        <li id="2"><a href="/">两只蜗牛艰难又浪漫的一吻</a></li>
-        <li id="3"><a href="/">春暖花开-走走停停-发现美</a></li>
-        <li id="4"><a href="/">琰智国际-Nativ for Life官方网站</a></li>
-        <li id="5"><a href="/">个人博客模板（2014草根寻梦）</a></li>
-        <!--<li><a href="/">简单手工纸玫瑰</a></li>-->
-        <!--<li><a href="/">响应式个人博客模板（蓝色清新）</a></li>-->
-        <!--<li><a href="/">蓝色政府（卫生计划生育局）网站</a></li>-->
+        <li name="topArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
+        <li name="lastArticle"></li>
       </ul>
     </div>
     <div class="links">
       <h2>
         <p>友情链接</p>
       </h2>
-      <!--<ul>-->
-        <!--<li><a href="/">sunny-Jin的个人博客</a></li>-->
-        <!--<li><a href="/">3DST技术社区</a></li>-->
-      <!--</ul>-->
+      <ul>
+        <li><a href="http://blog.csdn.net/jzy1990" target="_blank">sunny-Jin的个人博客</a></li>
+        <li><a href="/">3DST技术社区</a></li>
+        <li> <a href="Login.html"><span style="font-size: larger;color: red;font-weight: 200;">登录后台</span></a></li>
+      </ul>
+
     </div>
     <div class="copyright">
       <ul>
@@ -176,16 +173,35 @@
       data:{},
       dataType:'json',
       success:function (datajson) {
-          var lis = document.getElementsByTagName("li");
+          var lis = document.getElementsByName("lastArticle");
           for(var i=0;i<lis.length;i++)
           {
-              lis[i].innerHTML="<a href=\"/\">"+datajson[i].title+"</a>";
+              lis[i].innerHTML = "<a href='javascript:void(0)' onclick='viewArticle("+datajson[i].id+")'>"
+                  +datajson[i].title+"</a>";
+            //  lis[i].innerHTML="<a href=\"/\">"+datajson[i].title+"</a>";
           }
       },
       error:function (err) {
           alert("出现错误");
       }
   });
+
+  function viewArticle(id) {
+      $.ajax({
+          type:'post',
+          url:'/Article/displayContent.do',
+          data:{
+              id:id
+          },
+          dataType:'json',
+          success:function (datajson) {
+              $('#display').html(datajson.article.content);
+          },
+          error:function (err) {
+              alert("出现错误");
+          }
+      });
+  }
 </script>
 </body>
 </html>

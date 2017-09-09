@@ -46,7 +46,7 @@
     </delete>
 
     <select id="getLastArticles" resultMap="ArticleBaseMap">
-       SELECT title FROM article
+       SELECT * FROM article
         ORDER by publishTime DESC  LIMIT 5
     </select>
 </mapper>
