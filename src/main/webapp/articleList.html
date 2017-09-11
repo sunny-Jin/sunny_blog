@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
 
 </head>
 <body id="display">
@@ -81,13 +82,6 @@
                delArticle(row.id);
            }
        }
-
-        function formatterTime(value) {
-            var jsDate = new Date(value);
-            var converttime = jsDate.getFullYear()+'-'+(jsDate.getMonth()+1)+'-'+jsDate.getDate()+' '+
-                jsDate.getHours()+':'+jsDate.getMinutes()+':'+jsDate.getSeconds();
-            return converttime;
-        }
 
         function delArticle(id) {
             var flag = confirm("确认删除文章?");
