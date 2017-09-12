@@ -30,20 +30,20 @@
         <p>最好的生活是用心甘情愿的态度，过随遇而安的生活。</p>
       </ul>
     </div>
-    <div class="bloglist">
+    <div class="bloglist" id="bloglist">
       <h2>
         <p><span>推荐</span>文章</p>
       </h2>
-      <div class="blogs" id="blog">
-        <h3 id="title"></h3>
-        <figure><img src="images/01.jpg" ></figure>
-        <ul>
-          <p id="summary"></p>
-          <li id="a" name="a"></li>
-        </ul>
-        <p class="autor"><span id="author"></span><span>分类：【<a href="/">日记</a>】</span><span>浏览（<a href="/">459</a>）</span><span>评论（<a href="/">30</a>）</span></p>
-        <div class="dateview">2014-04-08</div>
-      </div>
+      <!--<div class="blogs" id="blog">-->
+        <!--<h3 id="title"></h3>-->
+        <!--<figure><img src="images/01.jpg" ></figure>-->
+        <!--<ul>-->
+          <!--<p id="summary"></p>-->
+          <!--<li id="a" name="a"></li>-->
+        <!--</ul>-->
+        <!--<p class="autor"><span id="author"></span><span>分类：【<a href="/">日记</a>】</span><span>浏览（<a href="/">459</a>）</span><span>评论（<a href="/">30</a>）</span></p>-->
+
+      <!--</div>-->
     </div>
   </article>
   <aside>
@@ -118,20 +118,51 @@
               //datajson是一个文章列表。
 
               for (var i=0;i<5;i++){
-                  var objdiv = document.createElement("div");
-                  objdiv .innerHTML = i+1;
-                  document.body.appendChild(objdiv );
+
+
+
+
+
+
+
+
+
+
+
+
+                  $('#bloglist').append("<div id='div+"+i+"'>" +
+                      "<h3 id=\"title\">ssss</h3>" +
+                      "<figure><img src=\"images/01.jpg\" ></figure>" +
+                      "<ul>\n" +
+                      "<p id=\"summary\"></p>\n" +
+                      "<li id=\"a\" name=\"a\"></li>\n" +
+                      "<p class=\"autor\"><span id=\"author\"></span><span>分类：【<a href=\"/\">日记</a>】</span><span>浏览\n" +
+                      "(<a href=\"/\">459</a>）</span><span>评论（<a href=\"/\">30</a>）</span></p>" +
+                      "</ul>" +
+                      " <div class=\"dateview\">2014-04-08</div></div>");
+
               }
 
+             // alert($("#0").attr({title:"编辑用户1"}));
+//              $("#title").html("dddd");
+            //  alert($("#0").children("h3").html("weweweweweew"));
 
 
 
-//              $('#title').html(datajson.article.title);
-//              $('#summary').html(datajson.article.summary);
-//              $('#author').html("作者:" + datajson.article.author);
+
+//              var newImg = $("#0").find("p");
+//              alert(newImg);
+//
+//
+//              $("#newDIv").html("weeee");
+
+
+//              $('#title').html(datajson[0].article.title);
+//              $('#summary').html(datajson[0].article.summary);
+//              $('#author').html("作者:" + datajson[0].article.author);
 //
 //              var li =document.getElementsByName("a");
-//              li[0].innerHTML = "<a href='javascript:void(0)' onclick='viewArticle("+datajson.article.id+")' " +
+//              li[0].innerHTML = "<a href='javascript:void(0)' onclick='viewArticle("+datajson[0].article.id+")' " +
 //                  "class='readmore'>阅读全文&gt;&gt;</a>";
 
           },
@@ -139,6 +170,7 @@
               alert("出现错误");
           }
       });
+      alert($("#title").html());
   });
 
   $.ajax({
@@ -170,6 +202,14 @@
   function viewArticle(id) {
       var url = "displayArticle.html?" +id;
       window.open(url);
+  }
+
+  function createDiv() {
+      for(var k=0;k<5;k++)
+      {
+         // $('#bloglist').appendChild("<div id='div+"+k+"'>" +div的内容可空+"</div>");
+      }
+
   }
 </script>
 </body>
