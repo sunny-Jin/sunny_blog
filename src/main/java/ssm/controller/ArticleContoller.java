@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
 import ssm.model.User;
 
 @Controller
@@ -24,14 +25,14 @@ public class ArticleContoller {
     @Resource
     private ArticleService articleService;
     JSONObject jsonObject = new JSONObject();
+
     @RequestMapping("/showArticles.do")
     @ResponseBody
     /*
     * 显示文章列表
     * */
-    public String showArticles()
-    {
-        List<Article> articles  = articleService.getArticles();
+    public String showArticles() {
+        List<Article> articles = articleService.getArticles();
         JSONArray jsonArray = JSONArray.fromObject(articles);
         return jsonArray.toString();
     }
@@ -41,28 +42,24 @@ public class ArticleContoller {
     * */
     @RequestMapping("/addArticle.do")
     @ResponseBody
-    public void addArticle(HttpServletRequest request,HttpSession session) throws ServletException,IOException
-    {
+    public void addArticle(HttpServletRequest request, HttpSession session) throws ServletException, IOException {
         String title = request.getParameter("title");
         String tags = request.getParameter("tags");
         int type = Integer.parseInt(request.getParameter("type"));
-        String summary= request.getParameter("summary");
+        String summary = request.getParameter("summary");
         String content = request.getParameter("content");
 //        Date now = new Date();
 //        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        String time = format.format(now);
         java.sql.Timestamp publishTime = new java.sql.Timestamp(new Date().getTime());  //发表时间
-       User u = (User)session.getAttribute("session_user");
+        User u = (User) session.getAttribute("session_user");
 
 
-        if(content != null)
-        {
+        if (content != null) {
             //写入数据库
-            articleService.addArticle(title,tags,type,summary,content,publishTime,u);
-          //  articleService.addContent(str);
-        }
-        else
-        {
+            articleService.addArticle(title, tags, type, summary, content, publishTime, u);
+            //  articleService.addContent(str);
+        } else {
 
         }
     }
@@ -72,27 +69,25 @@ public class ArticleContoller {
     * */
     @RequestMapping("/displayContent.do")
     @ResponseBody
-    public String displayContent(HttpServletRequest request)
-    {
+    public String displayContent(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         Article article = articleService.getContent(id);
-      //  String str = article.getContent();
+        //  String str = article.getContent();
         //JSONObject jsonObject = new JSONObject();
-        jsonObject.put("article",article);
+        jsonObject.put("article", article);
         return jsonObject.toString();
     }
+
     /*
     * 删除文章信息
     * */
     @RequestMapping("/delArticle.do")
     @ResponseBody
-    public String delArticle(HttpServletRequest request)
-    {
+    public String delArticle(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         int delFlag = articleService.delArticle(id);
-        if(delFlag > 0)
-        {
-            jsonObject.put("Flag",true);
+        if (delFlag > 0) {
+            jsonObject.put("Flag", true);
         }
 
         return jsonObject.toString();
@@ -100,8 +95,7 @@ public class ArticleContoller {
 
     @RequestMapping("/showDrafts.do")
     @ResponseBody
-    public String showDrafts(HttpServletRequest request)
-    {
+    public String showDrafts(HttpServletRequest request) {
         List<Article> list = articleService.getDrafts();
         JSONArray jsonArray = JSONArray.fromObject(list);
         return jsonArray.toString();
@@ -109,23 +103,20 @@ public class ArticleContoller {
 
     @RequestMapping("/delDraft.do")
     @ResponseBody
-    public String delDraft(HttpServletRequest request)
-    {
+    public String delDraft(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         int delFlag = articleService.delDraft(id);
-        if(delFlag > 0)
-        {
-            jsonObject.put("Flag",true);
+        if (delFlag > 0) {
+            jsonObject.put("Flag", true);
         }
         return jsonObject.toString();
     }
 
     @RequestMapping("/getLastArticles.do")
     @ResponseBody
-    public String getLastArticles(HttpServletRequest request)
-    {
+    public String getLastArticles(HttpServletRequest request) {
         List<Article> articles = articleService.getLastArticles();
         JSONArray jsonArray = JSONArray.fromObject(articles);
-        return  jsonArray.toString();
+        return jsonArray.toString();
     }
 }

@@ -116,61 +116,26 @@
           dataType:'json',
           success:function (datajson) {
               //datajson是一个文章列表。
-
-              for (var i=0;i<5;i++){
-
-
-
-
-
-
-
-
-
-
-
-
+              for (var i=0;i<3;i++){
                   $('#bloglist').append("<div id='div+"+i+"'>" +
-                      "<h3 id=\"title\">ssss</h3>" +
-                      "<figure><img src=\"images/01.jpg\" ></figure>" +
+                      "<div style='padding-left: 50px;padding-top: 10px;padding-bottom: 8px;'><h3 id=\"title\" style='font-size: larger;'>"+datajson[i].title+"</h3></div>" +
+                      "<figure style='float: left;padding-left: 30px;'><img src=\"images/01.jpg\" ></figure>" +
                       "<ul>\n" +
-                      "<p id=\"summary\"></p>\n" +
+                      "<div id=\"summary\" style='padding-left:10px;padding-right:100px;word-break:break-all; word-wrap:break-word;'><p>"+datajson[i].summary+"</p></div>\n" +
+                      "<a href='javascript:void(0)'" +
+                      "onclick='viewArticle("+datajson[i].id+")'" +
+                      "class='readmore'>阅读全文</a>"+
                       "<li id=\"a\" name=\"a\"></li>\n" +
-                      "<p class=\"autor\"><span id=\"author\"></span><span>分类：【<a href=\"/\">日记</a>】</span><span>浏览\n" +
+                      "<p style='padding-left: 15px;' class=\"autor\">作者:<span id=\"author\">"+datajson[i].author+"</span><span>分类：【<a href=\"/\">日记</a>】</span><span>浏览\n" +
                       "(<a href=\"/\">459</a>）</span><span>评论（<a href=\"/\">30</a>）</span></p>" +
                       "</ul>" +
                       " <div class=\"dateview\">2014-04-08</div></div>");
-
               }
-
-             // alert($("#0").attr({title:"编辑用户1"}));
-//              $("#title").html("dddd");
-            //  alert($("#0").children("h3").html("weweweweweew"));
-
-
-
-
-//              var newImg = $("#0").find("p");
-//              alert(newImg);
-//
-//
-//              $("#newDIv").html("weeee");
-
-
-//              $('#title').html(datajson[0].article.title);
-//              $('#summary').html(datajson[0].article.summary);
-//              $('#author').html("作者:" + datajson[0].article.author);
-//
-//              var li =document.getElementsByName("a");
-//              li[0].innerHTML = "<a href='javascript:void(0)' onclick='viewArticle("+datajson[0].article.id+")' " +
-//                  "class='readmore'>阅读全文&gt;&gt;</a>";
-
           },
           error:function (err) {
               alert("出现错误");
           }
       });
-      alert($("#title").html());
   });
 
   $.ajax({
