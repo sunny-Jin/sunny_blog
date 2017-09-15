@@ -22,7 +22,7 @@
         <h1>如影随形</h1>
         <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
         <div class="logo"><a href="/"></a></div>
-        <nav id="topnav"><a href="index.html">首页</a><a href="about.html">关于我</a><a href="newlist.html">慢生活</a><a href="share.html">模板分享</a><a href="new.html">模板主题</a></nav>
+        <nav id="topnav"><a href="index.html">首页</a><a href="about.html">关于我</a><a href="newlist.html">编程语言</a><a href="share.html">数据库</a><a href="new.html">其他技术</a></nav>
     </header>
     <article>
         <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">正文显示</a></h2>
@@ -60,15 +60,15 @@
                 <p>最新文章</p>
             </h2>
             <ul class="ph_n">
-                <span class="num1">1<li name="lastArticle"></li></span>
-                <li name="lastArticle"><span class="num2">2</span></li>
-                <li name="lastArticle"><span class="num3">3</span></li>
-                <li name="lastArticle"><span>4</span></li>
-                <li name="lastArticle"><span>5</span></li>
-                <li name="lastArticle"><span>6</span></li>
-                <li name="lastArticle"><span>7</span></li>
-                <li name="lastArticle"><span>8</span></li>
-                <li name="lastArticle"><span>9</span></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
+                <li name="lastArticle"></li>
             </ul>
             <h2>
                 <p>推荐文章</p>
@@ -177,10 +177,19 @@
             success:function (datajson) {
                 var lis = document.getElementsByName("lastArticle");
                 var listop = document.getElementsByName("topArticle");
+                var j=1
                 for(var i=0;i<lis.length;i++)
                 {
-                    lis[i].innerHTML = "<a href='javascript:void(0)' onclick='viewArticle("+datajson[i].id+")'>"
-                        +datajson[i].title+"</a>";
+                    if(i<3) {
+                        lis[i].innerHTML = "<span class=\"num1\">" + j + "</span><a href='javascript:void(0)' onclick='viewArticle(" + datajson[i].id + ")'>"
+                            + datajson[i].title + "</a>";
+                        j++;
+                    }
+                    else {
+                        lis[i].innerHTML = "<span>" + j + "</span><a href='javascript:void(0)' onclick='viewArticle(" + datajson[i].id + ")'>"
+                            + datajson[i].title + "</a>";
+                        j++;
+                    }
                 }
 
                 for(var i=0;i<listop.length;i++)
